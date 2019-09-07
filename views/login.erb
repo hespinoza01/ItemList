@@ -1,6 +1,10 @@
 <h1>ItemList | Acceso</h1>
 
-<form action="/login" method="post" accept-charset="utf-8">
+<% if @msg %>
+    <%= "<p>#{@msg}</p>" %>
+<% end %>
+
+<form method="post" accept-charset="utf-8">
     <fieldset>
         <input type="text" name="username" id="username-field">
         <label for="username-field">Usuario</label>

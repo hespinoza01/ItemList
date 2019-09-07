@@ -1,25 +1,31 @@
 <h1>ItemList | Registro</h1>
 
-<form action="/login" method="post" accept-charset="utf-8">
-    <fieldset>
-        <input type="text" name="fullname" id="fullname-field">
-        <label for="fullname-field">Nombre completo</label>
-    </fieldset>
+<% if @msg %>
+    <h2><%= @msg %></h2>
 
-    <fieldset>
-        <input type="text" name="username" id="username-field">
-        <label for="username-field">Usuario</label>
-    </fieldset>
+    <a href="/acceso">Iniciar sesión</a>
+<% else %>
+    <form method="post" accept-charset="utf-8">
+        <fieldset>
+            <input type="text" name="fullname" id="fullname-field">
+            <label for="fullname-field">Nombre completo</label>
+        </fieldset>
 
-    <fieldset>
-        <input type="password" name="password" id="password-field">
-        <label for="password-field">Contraseña</label>
-    </fieldset>
+        <fieldset>
+            <input type="text" name="username" id="username-field">
+            <label for="username-field">Usuario</label>
+        </fieldset>
 
-    <fieldset>
-        <input type="password" name="confirmPassword" id="confirm-password-field">
-        <label for="confirm-password-field">Confirmar contraseña</label>
-    </fieldset>
+        <fieldset>
+            <input type="password" name="password" id="password-field">
+            <label for="password-field">Contraseña</label>
+        </fieldset>
 
-    <button>Registrar</button>
-</form>
+        <fieldset>
+            <input type="password" name="confirmPassword" id="confirm-password-field">
+            <label for="confirm-password-field">Confirmar contraseña</label>
+        </fieldset>
+
+        <button>Registrar</button>
+    </form>
+<% end %>
