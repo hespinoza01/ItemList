@@ -5,27 +5,29 @@
 
     <a href="/acceso">Iniciar sesión</a>
 <% else %>
-    <form method="post" accept-charset="utf-8">
-        <fieldset>
-            <input type="text" name="fullname" id="fullname-field">
-            <label for="fullname-field">Nombre completo</label>
+    <form method="post" accept-charset="utf-8" class="form">
+        <fieldset class="form-fieldset">
+            <input class="form-field" type="text" name="fullname" id="fullname-field" placeholder=" " required>
+            <label class="form-label" for="fullname-field">Nombre completo</label>
         </fieldset>
 
-        <fieldset>
-            <input type="text" name="username" id="username-field">
-            <label for="username-field">Usuario</label>
+        <fieldset class="form-fieldset">
+            <input class="form-field" type="text" name="username" id="username-field" placeholder=" " required>
+            <label class="form-label" for="username-field">Usuario</label>
         </fieldset>
 
-        <fieldset>
-            <input type="password" name="password" id="password-field">
-            <label for="password-field">Contraseña</label>
+        <fieldset class="form-fieldset">
+            <input class="form-field" type="password" name="password" id="password-field" placeholder=" " required>
+            <label class="form-label" for="password-field">Contraseña</label>
         </fieldset>
 
-        <fieldset>
-            <input type="password" name="confirmPassword" id="confirm-password-field">
-            <label for="confirm-password-field">Confirmar contraseña</label>
+        <fieldset class="form-fieldset">
+            <input class="form-field" type="password" name="confirmPassword" id="confirm-password-field" placeholder=" " required>
+            <label class="form-label" for="confirm-password-field">Confirmar contraseña</label>
         </fieldset>
 
-        <button>Registrar</button>
+        <button class="form-submit btn">Registrar</button>
+
+        <p class="form-extra placeholder= " required>¿Ya tienes una cuenta? <a href="/acceso">acceder</a></p>
     </form>
 <% end %>

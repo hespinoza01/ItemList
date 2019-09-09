@@ -4,16 +4,18 @@
     <%= "<p>#{@msg}</p>" %>
 <% end %>
 
-<form method="post" accept-charset="utf-8">
-    <fieldset>
-        <input type="text" name="username" id="username-field">
-        <label for="username-field">Usuario</label>
+<form method="post" accept-charset="utf-8" class="form">
+    <fieldset class="form-fieldset">
+        <input class="form-field" type="text" name="username" id="username-field" placeholder=" " required>
+        <label class="form-label" for="username-field">Usuario</label>
     </fieldset>
 
-    <fieldset>
-        <input type="password" name="password" id="password-field">
-        <label for="password-field">Contraseña</label>
+    <fieldset class="form-fieldset">
+        <input class="form-field" type="password" name="password" id="password-field" placeholder=" " required>
+        <label class="form-label" for="password-field">Contraseña</label>
     </fieldset>
 
-    <button>Acceder</button>
+    <button class="form-submit btn">Acceder</button>
+
+    <p class="form-extra">¿Todavía no tienes una cuenta? <a href="/registro">crear cuenta</a></p>
 </form>
