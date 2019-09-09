@@ -7,13 +7,16 @@ require_relative "DB/user"
 
 set :port, 9000
 
+enable :sessions
+
 get "/" do
     unless session[:username]
         redirect to("/acceso")
     end
 
-    erb :login, layout: :main
+    erb :home, layout: :main
 end
+
 
 get "/acceso" do
     erb :login, layout: :main
@@ -49,6 +52,12 @@ post "/registro" do
     end
 
     erb :register, layout: :main
+end
+
+
+get "/salir" do
+    session.delete(:username)
+    redirect "/"
 end
 
 
