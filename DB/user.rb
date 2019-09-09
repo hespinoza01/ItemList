@@ -27,4 +27,9 @@ class User < SqliteDB
     def update!
         execute("update Users set username=?, fullname=?, password=? where username=? ", @username, @fullname, @password, @username)
     end
+
+    def exists?(_username, _password)
+        result = get_first("select * from Users where username=? and password=?", [_username, Base64.encode64(_password)])
+        (result) ? true : false
+    end
 end

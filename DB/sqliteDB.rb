@@ -33,4 +33,34 @@ class SqliteDB
             @DB.close
         end
     end
+
+    def query(cmd, *query_params)
+        $results = nil
+
+        begin
+            @DB = SQLite3::Database.open(uriDB)
+            $results = @DB.execute(cmd, *query_params)
+        rescue SQLite3::Exception => e
+            puts e
+        ensure
+            @DB.close
+        end
+
+        $results
+    end
+
+    def get_first(cmd, *query_params)
+        $results = nil
+
+        begin
+            @DB = SQLite3::Database.open(uriDB)
+            $results = @DB.get_first_row(cmd, *query_params)
+        rescue SQLite3::Exception => e
+            puts e
+        ensure
+            @DB.close
+        end
+
+        $results
+    end
 end

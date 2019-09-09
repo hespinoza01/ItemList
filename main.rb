@@ -19,6 +19,16 @@ get "/acceso" do
     erb :login, layout: :main
 end
 
+post "/acceso" do
+    if User.new.exists?(params[:username], params[:password])
+        session[:username] = params[:username]
+        redirect "/"
+    end
+
+    @msg = "usuario o contraseña incorrecto."
+    erb :login, layout: :main
+end
+
 
 get "/registro" do
     erb :register, layout: :main
