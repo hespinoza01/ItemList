@@ -17,7 +17,6 @@ html, body, *, *::before, *::after{
 body{
   font-family: "Open Sans";
   font-size: 16px;
-  padding: 1rem;
   min-height: 100vh;
 }
 
@@ -33,6 +32,11 @@ fieldset, input, button{
   text-align: center;
   border-radius: var(--border-radius);
   margin-bottom: 2rem;
+}
+
+.form-title{
+  padding: 1rem;
+  text-align: center;
 }
 
 .form {
