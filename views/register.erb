@@ -1,11 +1,15 @@
 <h1>ItemList | Registro</h1>
 
-<% if @msg %>
-    <h2><%= @msg %></h2>
+<% if @msg_success %>
+    <h2><%= @msg_success %></h2>
 
     <a href="/acceso">Iniciar sesión</a>
 <% else %>
     <form method="post" accept-charset="utf-8" class="form">
+        <% if @msg %>
+            <p class="msg-error"><%= @msg %></p>
+        <% end %>
+
         <fieldset class="form-fieldset">
             <input class="form-field" type="text" name="fullname" id="fullname-field" placeholder=" " required>
             <label class="form-label" for="fullname-field">Nombre completo</label>

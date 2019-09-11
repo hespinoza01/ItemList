@@ -46,7 +46,7 @@ post "/registro" do
         u.password = params[:password]
         u.save!
 
-        @msg = "Usuario registrado correctamente"
+        @msg_success = "Usuario registrado correctamente"
     else
         @msg = "Error, las contraseñas no coinciden."
     end

@@ -26,6 +26,15 @@ fieldset, input, button{
   outline: none;
 }
 
+.msg-error{
+  padding: .5rem;
+  color: #ff2800;
+  background-color: rgba(255, 99, 71, .3);
+  text-align: center;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+}
+
 .form {
   width: 30%;
   padding: 2rem 1rem;
