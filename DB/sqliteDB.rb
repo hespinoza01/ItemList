@@ -54,6 +54,7 @@ class SqliteDB
 
         begin
             @DB = SQLite3::Database.open(uriDB)
+            @DB.results_as_hash = true
             $results = @DB.get_first_row(cmd, *query_params)
         rescue SQLite3::Exception => e
             puts e

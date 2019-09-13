@@ -32,4 +32,15 @@ class User < SqliteDB
         result = get_first("select * from Users where username=? and password=?", [_username, Base64.encode64(_password)])
         (result) ? true : false
     end
+
+    def get(_username)
+        result = User.new
+
+        row = get_first("select username, fullname from Users where username=?", _username)
+
+        result.username= row[0]
+        result.fullname= row[1]
+
+        result
+    end
 end
