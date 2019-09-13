@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ItemList</title>
+    <!--<script src="https://kit.fontawesome.com/81b274c7df.js"></script>-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+</head>
+<body>
+    <header class="headerpage">
+        <h1 class="headerpage--title">ItemList</h1>
+        <div class="headerpage--info">
+            <p class="headerpage--info__fullname"><%= @user.fullname %></p>
+            <p class="headerpage--info__username"><%= @user.username %></p>
+            <img class="headerpage--info__avatar" src="img/avatar.svg" alt="">
+        </div>
+    </header>
+
+    <main class="main">
+        <aside class="aside">
+            <section>
+                <article class="aside--article">
+                    <a class="aside--article__item <%= (@current_route=='/') ? 'active' : '' %>" href="/"><i class="fa fa-sticky-note-o"></i> Notas</a>
+                </article>
+
+                <article class="aside--article">
+                    <h4 class="aside--article__title">Etiquetas</h4>
+                    <a class="aside--article__item" href="/etiqueta"><i class="fa fa-edit"></i> Editar etiquetas</a>
+                </article>
+
+                <article class="aside--article">
+                    <a class="aside--article__item" href="/archivo"><i class="fa fa-inbox"></i> Notas archivadas</a>
+                    <a class="aside--article__item" href="/papelera"><i class="fa fa-trash-o"></i> Papelera</a>
+                </article>
+            </section>
+
+
+            <a class="logout-link" href="/salir"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+        </aside>
+
+        <section class="content">
+            <%= yield %>
+        </section>
+    </main>
+</body>
+</html>

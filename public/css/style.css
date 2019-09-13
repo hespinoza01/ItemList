@@ -2,7 +2,11 @@
   --primary: #4069f0;
   --secondary: #fff;
 
+  --primary-alpha: rgba(65, 106, 240, .3);
+
   --shadow-pimary: 0px 0px 15px 0px rgba(65,106,240,0.9);
+
+  --text: #333333;
 
   --box-shadow: 0 0 15px 0px gainsboro;
   --border-radius: 7px;
@@ -17,12 +21,17 @@ html, body, *, *::before, *::after{
 body{
   font-family: "Open Sans";
   font-size: 16px;
+  color: var(--text);
   min-height: 100vh;
 }
 
 fieldset, input, button{
   border: none;
   outline: none;
+}
+
+a{
+  text-decoration: none;
 }
 
 .msg-error{
@@ -100,4 +109,97 @@ fieldset, input, button{
 
 .form-extra{
   padding-top: 1.5rem;
+}
+
+/*  Home style's  */
+.headerpage{
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem 1rem;
+  box-shadow: var(--box-shadow);
+}
+.headerpage--info{
+  display: grid;
+  grid-template-areas: "fullname avatar" "username avatar";
+}
+
+.headerpage--info__fullname, .headerpage--info__username{
+  text-align: right;
+  padding-right: .5rem;
+}
+.headerpage--info__fullname{
+  grid-area: fullname;
+  font-weight: bold;
+}
+.headerpage--info__username{
+  grid-area: username;
+}
+.headerpage--info__avatar{
+  grid-area: avatar;
+  width: 2.5rem;
+}
+
+
+/*  main style's  */
+.main{
+  display: flex;
+  height: calc(100vh - 3.75rem);
+}
+
+.aside{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20%;
+  height: 100%;
+  padding: .5rem 0;
+}
+.aside--article{
+  padding: .5rem 0;
+  border-bottom: 1px solid gainsboro;
+}
+.aside--article__title{
+  padding: .5rem 0 1rem .5rem;
+}
+
+.aside--article__item{
+  display: flex;
+  align-items: center;
+  padding: .6rem 1.5rem;
+  background-color: transparent;
+  border-radius: 0 100px 100px 0;
+  color: var(--text);
+  transition: background-color .3s, color .3s;
+}
+.aside--article__item i{
+  width: 2rem;
+  font-size: 1.25rem;
+  margin-right: .5rem;
+  transform: rotateX(0deg);
+  transition: transform .35s;
+  transform-origin: center center;
+}
+.aside--article__item:hover i{
+  transform: rotateX(360deg);
+  transform-origin: center center;
+}
+.logout-link{
+  display: block;
+  text-align: center;
+  color: var(--primary);
+}
+.aside--article__item.active{
+  background-color: var(--primary-alpha);
+  color: var(--primary);
+  font-weight: bold;
+}
+.aside--article__item:hover{
+  background-color: rgba(220, 220, 220, .75);
+  color: var(--text);
+}
+
+.content{
+  width: 80%;
+  padding: 1rem 2rem;
+  overflow-y: auto;
 }

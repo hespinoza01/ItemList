@@ -14,7 +14,9 @@ get "/" do
         redirect to("/acceso")
     end
 
-    erb :home, layout: :main
+    @user = User.new.get(session[:username])
+    @current_route = "/"
+    erb :home, layout: :home_layout
 end
 
 
