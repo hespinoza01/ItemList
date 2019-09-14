@@ -1,0 +1,70 @@
+<form class="list-form" action="" id="list-form">
+    <input class="list-form--title" type="text" placeholder="Añadir una lista...">
+    <div class="list-item--container">
+    </div>
+    <button>Cerrar</button>
+</form>
+
+<script type="text/javascript" charset="utf-8">
+    let form = document.querySelector("form"),
+        listFormTitle = document.querySelector(".list-form--title"),
+        listItemContainer = document.querySelector('.list-item--container');
+
+    const ITEM_ELEMENT = () => {
+        let idNode = new Date();
+
+        idNode = `item-${idNode.getHours()}${idNode.getMinutes()}${idNode.getSeconds()}`;
+
+        return `
+            <fieldset class="list-item">
+                <label class="list-item__label" for="${idNode}">+</label>
+                <input class="list-item__field" type="text" placeholder="Elemento de lista" id="${idNode}">
+                <span class="fa fa-times list-item__close" aria-hidden="true"></span>
+            </fieldset>
+        `;
+    };
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        form.classList.remove('new-list');
+        listFormTitle.setAttribute('placeholder', 'Añadir una lista...');
+    });
+
+    form.addEventListener('click', e => {
+        let node = e.target;
+
+        if(node.matches('.list-form--title') && !form.classList.contains('new-list')) {
+            e.target.setAttribute('placeholder', 'Título');
+            form.classList.add('new-list');
+
+            listItemContainer.insertAdjacentHTML('beforeend', ITEM_ELEMENT());
+        }
+
+        if(node.matches('.list-item__close')){
+            listItemContainer.removeChild(node.parentNode);
+        }
+    });
+
+    form.addEventListener('input', e => {
+        let node = e.target;
+
+        if(node.matches('.list-item__field')){
+            let parent = node.parentNode,
+                label = parent.querySelector('.list-item__label'),
+                editing = node.getAttribute('editing');
+
+            if(node.value.length > 0 && !editing){
+                listItemContainer.insertAdjacentHTML('beforeend', ITEM_ELEMENT());
+                node.setAttribute('editing', 'true');
+                label.innerHTML = `<input type="checkbox">`;
+            }
+
+            if(node.value.length === 0 && editing){
+                node.removeAttribute('editing');
+                listItemContainer.removeChild(parent.parentNode.lastElementChild);
+                label.innerHTML = `+`;
+            }
+        }
+    });
+</script>

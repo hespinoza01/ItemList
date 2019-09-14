@@ -203,3 +203,69 @@ a{
   padding: 1rem 2rem;
   overflow-y: auto;
 }
+
+.list-form{
+  width: 50%;
+  margin: 1rem auto 0 auto;
+  padding: .5rem 0;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: width .2s;
+}
+
+.list-form--title{
+  width: 100%;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 2rem;
+  text-align: center;
+}
+.list-form.new-list .list-form--title{
+  text-align: left;
+  font-size: 1rem;
+}
+.list-form:not(.new-list){
+  width: 25%;
+  height: 3rem;
+}
+.list-form:not(.new-list) .list-form--title{
+  cursor: default;
+}
+
+.list-item--container{
+  padding: .5rem 0;
+}
+.list-item{
+  height: 2rem;
+  width: 100%;
+  padding: .25rem 1rem;
+  background-color: transparent;
+}
+.list-item.active{
+  background-color: #f0f0f0;
+}
+
+.list-item *{
+  display: inline-block;
+}
+.list-item__label{
+  width: 1rem;
+  line-height: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+.list-item__field{
+  width: calc(100% - 4rem);
+  font-size: 1rem;
+  background-color: transparent;
+}
+.list-item__field:placeholder-shown + .list-item__close{
+  display: none;
+}
+.list-item__close:hover{
+  width: 1rem;
+  color: var(--primary);
+}
