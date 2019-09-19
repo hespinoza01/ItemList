@@ -257,6 +257,9 @@ a{
   font-weight: bold;
   text-align: center;
 }
+.list-item__label.checked ~ .list-item__field{
+  text-decoration: line-through;
+}
 .list-item__field{
   width: calc(100% - 4rem);
   font-size: 1rem;
@@ -268,4 +271,34 @@ a{
 .list-item__close:hover{
   width: 1rem;
   color: var(--primary);
+}
+
+.list-form__submit{
+  margin: 1rem 0 .5rem 1rem;
+}
+
+.list-form__submit, .list-form__wrapper-btn{
+  display: inline-block;
+  margin-left: 1rem;
+}
+.list-form__select-tag{
+  display: block;
+  font-family: 'FontAwesome', sans-serif;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  padding: .5rem;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 0 0 transparent;
+  transition: box-shadow .3s;
+}
+.list-form__select-tag:hover{
+  box-shadow: var(--box-shadow);
+}
+
+.list-form__select-tag option{
+  font-family: inherit;
+  font-size: .9rem;
 }

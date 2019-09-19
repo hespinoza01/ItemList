@@ -2,7 +2,12 @@
     <input class="list-form--title" type="text" placeholder="Añadir una lista...">
     <div class="list-item--container">
     </div>
-    <button>Cerrar</button>
+    <button class="btn list-form__submit">Cerrar</button>
+    <div class="list-form__wrapper-btn">
+        <select class="list-form__select-tag">
+            <option class="fa fa-tag" value="some">&#xf02b Añadir etiqueta</option>
+        </select>
+    </div>
 </form>
 
 <script type="text/javascript" charset="utf-8">
@@ -29,6 +34,7 @@
 
         form.classList.remove('new-list');
         listFormTitle.setAttribute('placeholder', 'Añadir una lista...');
+        listItemContainer.innerHTML = '';
     });
 
     form.addEventListener('click', e => {
@@ -43,6 +49,19 @@
 
         if(node.matches('.list-item__close')){
             listItemContainer.removeChild(node.parentNode);
+        }
+
+        if(node.matches('input[type="checkbox"]')){
+            let parent = node.parentNode,
+                field = parent.parentNode.querySelector('.list-item__field');
+
+            if(node.checked){
+                parent.classList.add('checked');
+                field.setAttribute('checked', 'true');
+            }else{
+                parent.classList.remove('checked');
+                field.removeAttribute('checked');
+            }
         }
     });
 
