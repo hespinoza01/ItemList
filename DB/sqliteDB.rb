@@ -16,6 +16,16 @@ class SqliteDB
                 fullname varchar(255) not null,
                 password varchar(64) not null
             )""")
+
+            @DB.execute("""
+            create table if not exists Lists(
+                id varchar(12) primary key not null,
+                username varchar(25) not null,
+                create_date varchar(64) not null,
+                update_date varchar(64) not null
+            )""")
+
+
         rescue SQLite3::Exception => e
             puts e
         ensure
