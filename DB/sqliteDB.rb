@@ -20,9 +20,23 @@ class SqliteDB
             @DB.execute("""
             create table if not exists Lists(
                 id varchar(12) primary key not null,
-                username varchar(25) not null,
+                username varchar(25),
                 create_date varchar(64) not null,
-                update_date varchar(64) not null
+                update_date varchar(64) not null,
+                foreign key (username) references Users(username)
+                    on update set null
+                    on delete set null
+            )""")
+
+            @DB.execute("""
+            create table if not exists ItemList(
+                id varchar(6) primary key not null,
+                id_list varchar(12),
+                content text,
+                checked int default 0,
+                foreign key (id_list) references Lists(id)
+                    on update set null
+                    on delete set null
             )""")
 
 
