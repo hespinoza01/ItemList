@@ -11,23 +11,32 @@ class List < SqliteDB
     include CurrentDateTime
     include RandomString
 
-    def initialize(_username=nil)
+    def initialize(_username=nil, id:getRandomString(12), create_date:getCurrentDateTime, update_date:nil, items:Array.new)
         super()
-        @create_date = getCurrentDateTime
-        @update_date = @create_date
-        @id = getRandomString
+        @create_date = create_date
+        @update_date = update_date ? update_date : create_date
+        @id = id
         @username = _username
-        @items = Array.new
+        @items = items
     end
 
     def save!
         params = [id, username, create_date, update_date]
         execute("insert into Lists(id, username, create_date, update_date) values(?, ?, ?, ?)", *params)
+
+        items.each do |i|
+            i.id_list = id
+            i.save!
+        end
     end
 
     def update!
         params = [username, create_date, getCurrentDateTime, id]
         execute("update Lists set username=?, create_date=?, update_date=? where id=?", *params)
+
+        items.each do |i|
+            i.update!
+        end
     end
 
     def get(_id)
