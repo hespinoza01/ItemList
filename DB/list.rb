@@ -1,20 +1,23 @@
 require 'date'
-require 'sqliteDB'
+require_relative 'sqliteDB'
 
+require_relative 'itemList'
 require_relative '../Utilities/current_datetime'
 require_relative '../Utilities/../Utilities/random_string'
 
 class List < SqliteDB
-    attr_accessor :username, :id, :create_date, :update_date
+    attr_accessor :username, :id, :create_date, :update_date, :items
 
     include CurrentDateTime
     include RandomString
 
-    def initialize()
+    def initialize(_username=nil)
         super()
         @create_date = getCurrentDateTime
         @update_date = @create_date
         @id = getRandomString
+        @username = _username
+        @items = Array.new
     end
 
     def save!
@@ -36,7 +39,31 @@ class List < SqliteDB
         result.username = row[1]
         result.create_date = row[2]
         result.update_date = row[3]
+        result.items.push(*ItemList.new(id_list:result.id).getItemsList!)
 
         result
+    end
+
+    def getAll!
+        results = Array.new
+
+        rows = query("select id from Lists")
+
+        rows.each do |row|
+            results << get(row.first)
+        end
+
+        results
+    end
+
+    def to_s
+        puts "ID: #{id}"
+        puts "USERNAME: #{username}"
+        puts "CREATE DATE: #{create_date}"
+        puts "UPDATE DATE: #{update_date}"
+        puts "ITEMS #{items.length}: "
+        items.each do |i|
+            puts "    #{i}"
+        end
     end
 end

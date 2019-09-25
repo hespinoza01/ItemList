@@ -6,16 +6,12 @@ class ItemList < SqliteDB
 
     include RandomString
 
-    def initialize(id:nil, id_list:nil, content:nil, checked:nil)
+    def initialize(id:nil, id_list:nil, content:nil, checked:0)
         super()
 
         @id_list = id_list
         @content = content
         @checked = checked
-    end
-
-    def to_s
-        "#{id} - #{id_list} - #{content} - #{checked}"
     end
 
     def getItemsList!
@@ -38,12 +34,16 @@ class ItemList < SqliteDB
     end
 
     def save!
-        params = [getRandomString(6), id_list, content]
-        execute("insert into ItemList(id, id_list, content) values(?, ?, ?)", *params)
+        params = [getRandomString(6), id_list, content, checked]
+        execute("insert into ItemList(id, id_list, content, checked) values(?, ?, ?, ?)", *params)
     end
 
     def update!
         params = [id_list, content, checked, id]
         execute("update ItemList set id_list=?, content=?, checked=? where id=?", *params)
+    end
+
+    def to_s
+        "#{id} - #{id_list} - #{content} - #{checked}"
     end
 end
