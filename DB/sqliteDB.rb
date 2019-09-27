@@ -21,6 +21,7 @@ class SqliteDB
             create table if not exists Lists(
                 id varchar(12) primary key not null,
                 username varchar(25),
+                title varchar(64),
                 create_date varchar(64) not null,
                 update_date varchar(64) not null,
                 foreign key (username) references Users(username)

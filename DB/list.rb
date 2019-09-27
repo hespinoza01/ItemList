@@ -6,23 +6,24 @@ require_relative '../Utilities/current_datetime'
 require_relative '../Utilities/../Utilities/random_string'
 
 class List < SqliteDB
-    attr_accessor :username, :id, :create_date, :update_date, :items
+    attr_accessor :username, :id, :title, :create_date, :update_date, :items
 
     include CurrentDateTime
     include RandomString
 
-    def initialize(_username=nil, id:getRandomString(12), create_date:getCurrentDateTime, update_date:nil, items:Array.new)
+    def initialize(username=nil, id:getRandomString(12), title:'', create_date:getCurrentDateTime, update_date:nil, items:Array.new)
         super()
         @create_date = create_date
         @update_date = update_date ? update_date : create_date
         @id = id
-        @username = _username
+        @title = title
+        @username = username
         @items = items
     end
 
     def save!
-        params = [id, username, create_date, update_date]
-        execute("insert into Lists(id, username, create_date, update_date) values(?, ?, ?, ?)", *params)
+        params = [id, username, title, create_date, update_date]
+        execute("insert into Lists(id, username, title, create_date, update_date) values(?, ?, ?, ?, ?)", *params)
 
         items.each do |i|
             i.id_list = id
@@ -31,8 +32,8 @@ class List < SqliteDB
     end
 
     def update!
-        params = [username, create_date, getCurrentDateTime, id]
-        execute("update Lists set username=?, create_date=?, update_date=? where id=?", *params)
+        params = [username, title, create_date, getCurrentDateTime, id]
+        execute("update Lists set username=?, title=?, create_date=?, update_date=? where id=?", *params)
 
         items.each do |i|
             i.update!
@@ -42,12 +43,13 @@ class List < SqliteDB
     def get(_id)
         result = List.new
 
-        row = get_first("select id, username, create_date, update_date from Lists where id=?", _id)
+        row = get_first("select id, username, title, create_date, update_date from Lists where id=?", _id)
 
         result.id = row[0]
         result.username = row[1]
-        result.create_date = row[2]
-        result.update_date = row[3]
+        result.title = row[2]
+        result.create_date = row[3]
+        result.update_date = row[4]
         result.items.push(*ItemList.new(id_list:result.id).getItemsList!)
 
         result
@@ -68,6 +70,7 @@ class List < SqliteDB
     def to_s
         puts "ID: #{id}"
         puts "USERNAME: #{username}"
+        puts "TITLE: #{title}"
         puts "CREATE DATE: #{create_date}"
         puts "UPDATE DATE: #{update_date}"
         puts "ITEMS #{items.length}: "
