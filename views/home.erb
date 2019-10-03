@@ -1,14 +1,31 @@
-<form class="list-form" action="" id="list-form">
+<form class="list-form" action="" id="list-form" method="post">
     <input class="list-form--title" type="text" placeholder="Añadir una lista...">
     <div class="list-item--container">
     </div>
     <button class="btn list-form__submit">Cerrar</button>
     <div class="list-form__wrapper-btn">
         <select class="list-form__select-tag">
-            <option class="fa fa-tag" value="some">&#xf02b Añadir etiqueta</option>
+            <option class="fa fa-tag" value="none">&#xf02b Añadir etiqueta</option>
         </select>
     </div>
 </form>
+
+<section class="list-viewer">
+    <% for @List in @Lists %>
+        <article class="list">
+            <h3 list-id="<%= @List.id %>">Título lista</h3>
+            <div>
+                <% for @item in @List.items %>
+                    <p item-id="<%= @item.id %>">
+                        <input type="checkbox" <%= (@item.checked == 1) ? 'checked="true"' : '' %>>
+                        <spam><%= @item.content %></spam>
+                    </p>
+                <% end %>
+            </div>
+            <p><span>Creada el <%= @List.create_date %></span>, <span>última actualización el <%= @List.update_date %></span></p>
+        </article>
+    <% end %>
+</section>
 
 <script type="text/javascript" charset="utf-8">
     let form = document.querySelector("form"),
@@ -32,7 +49,39 @@
     form.addEventListener('submit', e => {
         e.preventDefault();
 
+        let titleList = form.querySelector('.list-form--title').value,
+            itemsContainer = Array.from(form.querySelector('.list-item--container').children),
+            itemsList = [];
+
+        if(itemsContainer.length > 1){
+            itemsContainer.forEach(child => {
+                let check = child.querySelector('input[type="checkbox"]'),
+                    text = child.querySelector('input[type="text"]');
+
+                if(check){
+                    itemsList.push({checked: check.checked, text: text.value})
+                }
+            });
+
+            fetch('/', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    title: titleList,
+                    items: itemsList
+                })
+            })
+                .then(res => res.ok ? res : Promise.reject(res))
+                .then(res => {
+                    if(res.status === 200){
+                        alert('¡Lista añadida correctamente!')
+                    }
+                })
+                .catch(err => console.error(err));
+        }
+
         form.classList.remove('new-list');
+        listFormTitle.value = '';
         listFormTitle.setAttribute('placeholder', 'Añadir una lista...');
         listItemContainer.innerHTML = '';
     });

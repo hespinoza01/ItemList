@@ -302,3 +302,14 @@ a{
   font-family: inherit;
   font-size: .9rem;
 }
+
+
+/* List Viewer */
+
+.list{
+  border: 1px solid var(--primary);
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
