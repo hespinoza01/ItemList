@@ -59,7 +59,7 @@
                     text = child.querySelector('input[type="text"]');
 
                 if(check){
-                    itemsList.push({checked: check.checked, text: text.value})
+                    itemsList.push({checked: check.checked, content: text.value})
                 }
             });
 
@@ -74,10 +74,14 @@
                 .then(res => res.ok ? res : Promise.reject(res))
                 .then(res => {
                     if(res.status === 200){
-                        alert('¡Lista añadida correctamente!')
+                        alert('¡Lista añadida correctamente!');
+                        location.reload();
                     }
                 })
-                .catch(err => console.error(err));
+                .catch(err => {
+                    console.error(err);
+                    alert('Error al almacenar la lista');
+                });
         }
 
         form.classList.remove('new-list');
