@@ -6,7 +6,8 @@
 
   --shadow-pimary: 0px 0px 15px 0px rgba(65,106,240,0.9);
 
-  --text: #333333;
+  --text: #333;
+  --text-light: #5f5f5f;
 
   --box-shadow: 0 0 15px 0px gainsboro;
   --border-radius: 7px;
@@ -19,7 +20,7 @@ html, body, *, *::before, *::after{
 }
 
 body{
-  font-family: "Open Sans";
+  font-family: sans-serif;
   font-size: 16px;
   color: var(--text);
   min-height: 100vh;
@@ -206,7 +207,7 @@ a{
 
 .list-form{
   width: 50%;
-  margin: 1rem auto 0 auto;
+  margin: .5rem auto 1rem auto;
   padding: .5rem 0;
   overflow: hidden;
   border-radius: var(--border-radius);
@@ -305,11 +306,48 @@ a{
 
 
 /* List Viewer */
+.list-viewer{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 15rem;
+  grid-auto-flow: row;
+  grid-auto-rows: 20rem;
+  grid-gap: 1rem;
+}
 
 .list{
-  border: 1px solid var(--primary);
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--secondary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   margin: 0 auto;
-  margin-bottom: 2rem;
   padding: 1rem;
+}
+
+.list--title{
+  margin-bottom: .5rem;
+}
+.list--content, .list--content_item{
+  color: var(--text);
+}
+.list--content{
+  height: 70%;
+  margin: 0 -1rem;
+  margin-bottom: 0.5rem;
+  padding: 0 1rem;
+  background: linear-gradient(to bottom, #fff 75%, rgba(0,0,0,.1));
+  overflow: hidden;
+}
+.list--content_item span{
+  cursor: default;
+}
+.list--content_item input[type="checkbox"]:checked + span{
+  text-decoration: line-through;
+}
+.list--date{
+  padding-top: .25rem;
+  font-size: 12px;
+  color: var(--text-light);
 }

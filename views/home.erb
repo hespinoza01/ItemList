@@ -13,16 +13,19 @@
 <section class="list-viewer">
     <% for @List in @Lists %>
         <article class="list">
-            <h3 list-id="<%= @List.id %>">Título lista</h3>
-            <div>
+            <h3 class="list--title" list-id="<%= @List.id %>"><%= @List.title %></h3>
+            <div class="list--content">
                 <% for @item in @List.items %>
-                    <p item-id="<%= @item.id %>">
-                        <input type="checkbox" <%= (@item.checked == 1) ? 'checked="true"' : '' %>>
-                        <spam><%= @item.content %></spam>
+                    <p class="list--content_item" item-id="<%= @item.id %>">
+                        <input type="checkbox" <%= (@item.checked == 1) ? 'checked="true"' : '' %> onclick="return false;">
+                        <span><%= @item.content %></span>
                     </p>
                 <% end %>
             </div>
-            <p><span>Creada el <%= @List.create_date %></span>, <span>última actualización el <%= @List.update_date %></span></p>
+            <div>
+                <p class="list--date">Creada: <%= @List.create_date %></p>
+                <p class="list--date">Editada: <%= @List.update_date %></p>
+            </div>
         </article>
     <% end %>
 </section>
