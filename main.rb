@@ -21,13 +21,16 @@ before do
     if ['/acceso', '/registro'].include? path_name and session[:username]
         redirect to("/")
     end
+
+    if session[:username]
+        @user = User.new.get(session[:username])
+        @current_route = path_name
+    end
 end
 
 
 get "/" do
-    @user = User.new.get(session[:username])
     @Lists = List.new(session[:username]).getAll!
-    @current_route = "/"
     erb :home, layout: :home_layout
 end
 
@@ -59,9 +62,6 @@ end
 
 
 get "/etiqueta" do
-    @user = User.new.get(session[:username])
-    @current_route = "/etiqueta"
-
     erb :tag, layout: :home_layout
 end
 
