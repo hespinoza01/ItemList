@@ -12,11 +12,19 @@ set :port, 9000
 
 enable :sessions
 
-get "/" do
-    unless session[:username]
+before do
+    path_name = request.path_info
+    if ['/', '/etiqueta'].include? path_name and not session[:username]
         redirect to("/acceso")
     end
 
+    if ['/acceso', '/registro'].include? path_name and session[:username]
+        redirect to("/")
+    end
+end
+
+
+get "/" do
     @user = User.new.get(session[:username])
     @Lists = List.new(session[:username]).getAll!
     @current_route = "/"
@@ -26,7 +34,7 @@ end
 
 post "/" do
     data = JSON.parse(request.body.read)
-puts data
+
     data_title = data["title"]
     data_username = session[:username]
     data_items = Array.new
@@ -47,6 +55,14 @@ puts data
     ).save!
 
     "Root path in post method"
+end
+
+
+get "/etiqueta" do
+    @user = User.new.get(session[:username])
+    @current_route = "/etiqueta"
+
+    erb :tag, layout: :home_layout
 end
 
 
