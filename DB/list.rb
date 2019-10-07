@@ -58,7 +58,7 @@ class List < SqliteDB
     def getAll!
         results = Array.new
 
-        rows = query("select id from Lists")
+        rows = query("select id from Lists where username=?", username)
 
         rows.each do |row|
             results << get(row.first)
