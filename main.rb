@@ -9,6 +9,7 @@ require_relative 'DB/itemList'
 
 
 set :port, 9000
+set :static_cache_control, [:public, max_age: 0]
 
 enable :sessions
 
